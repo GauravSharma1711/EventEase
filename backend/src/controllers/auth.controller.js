@@ -66,7 +66,7 @@ export const login = async (req, res) => {
     generateTokenAndSetCookie(user._id, res);
 
        const { password: _, ...safeUser } = user._doc;
-       
+
     return res.status(200).json({
       message: "Logged in successfully",
       user: safeUser,
@@ -81,7 +81,13 @@ export const login = async (req, res) => {
 
 export const logout = async (req,res)=>{
        try {
-        
+          res.clearCookie('jwt', {
+         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+         sameSite: 'strict'
+     });
+
+  res.status(200).json({ message: 'Logged out successfully' });
        } catch (error) {
           console.log("Erorr in logout controller",error);
         return res.status(500).json({error:"Internal server error"});
