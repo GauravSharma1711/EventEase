@@ -24,6 +24,11 @@ const eventSchema = new mongoose.Schema({
    category: {
    type:String,
    required:true,
+},
+status:{
+   type:"String",
+   enum:["Upcomming","Ongoing","Completed"],
+   default:"Upcomming"
 }
 
 
