@@ -124,3 +124,40 @@ export const getAllEvents = async (req,res)=>{
         return res.status(500).json({error:"Internal server error"});
     }
 }
+
+
+export const updateEventStatus = async(req,res)=>{
+  try {
+
+     const { eventId } = req.params; 
+   
+    const loggedInUser = await User.findById(req.user.id);
+    if (!loggedInUser || loggedInUser.role !== 'admin') {
+      return res.status(403).json({ error: 'Not authorized to update event Date' });
+    }
+
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+   const currentDate = new Date();
+    const eventDate = new Date(event.date);
+
+    if (eventDate > currentDate) {
+      event.status = "Upcoming";
+    } else if (eventDate < currentDate) {
+      event.status = "Completed";
+    } else {
+      event.status = "Ongoing";
+    }
+
+    await event.save();
+
+    return res.status(201).json({message:"event status updated successfully"})
+
+  } catch (error) {
+       console.log("error in  updateEventStatus controller",error);
+        return res.status(500).json({error:"Internal server error"});
+  }
+}
