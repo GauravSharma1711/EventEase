@@ -3,12 +3,15 @@ import Booking from "../models/booking.model.js"
 import Event from "../models/event.model.js"
 import User from "../models/user.model.js";
 
+import logBooking from "../utils/logger.js";
 
 export const bookSeats = async (req, res) => {
   try {
     const eventId = req.params.eventId;
     const userId = req.user.id;
     const { seats } = req.body;
+
+    const user = await User.findById(userId)
 
    
     if (!seats || seats < 1 || seats > 2) {
@@ -46,6 +49,9 @@ export const bookSeats = async (req, res) => {
    
     event.bookedSeats += seats;
     await event.save();
+
+    logBooking(user,eventId);
+
 
     return res.status(201).json({
       message: "Booking successful",
