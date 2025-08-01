@@ -8,6 +8,7 @@ import cors from 'cors'
 
 import authRoutes from './routes/auth.route.js'
 import eventRoutes from './routes/event.route.js'
+import bookingRoutes from './routes/booking.route.js'
 
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(cors({
 
 app.use('/api/v1/auth',authRoutes);
 app.use('/api/v1/event',eventRoutes);
+app.use('/api/v1/booking',bookingRoutes);
 
 app.listen(PORT,()=>{
     connectDB();

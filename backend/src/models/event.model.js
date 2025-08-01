@@ -16,6 +16,10 @@ const eventSchema = new mongoose.Schema({
     required:true,
     min: 1
    },
+    bookedSeats: {
+    type: Number,
+    default: 0
+  },
    location:{
     type:String,
     enum:["Online","In-Person"],
@@ -33,7 +37,12 @@ status:{
 date: {
   type: Date,
   required: true
-}
+},
+ eventId: {
+    type: String,
+    unique: true
+  },
+
 
 
 
