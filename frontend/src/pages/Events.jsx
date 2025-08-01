@@ -7,6 +7,8 @@ import useEventStore from '../store/eventStore.js';
 import { MdDelete } from "react-icons/md";
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import CreateEvent from '../Components/CreateEvent.jsx';
+import BookEvent from '../Components/BookEvent.jsx';
 
 
 
@@ -17,7 +19,7 @@ const navigate = useNavigate();
     const {authUser,logout} = useAuthStore();
    
     
-    const {events,fetchAllEvents} = useEventStore();
+    const {events,fetchAllEvents,deleteEvent} = useEventStore();
 
 
     useEffect(() => {
@@ -25,27 +27,17 @@ const navigate = useNavigate();
     }, [events,fetchAllEvents])
     
 
-    const handleBookingClick = (e)=>{
-        try {
-             e.preventDefault();
-          e.stopPropagation();
-            if(!authUser){
-                toast.error("login first")
-                navigate('/login')
-            }
-        } catch (error) {
-            toast.error("Something went wrong");
-          console.error(error);
-        }
-    }
+   
+  
 
-    const handleDeleteEvent = (e)=>{
+    const handleDeleteEvent = async(e,eventId)=>{
           try {
       e.preventDefault();
           e.stopPropagation();
             if(!authUser || authUser.role!=="admin"){
                 toast.error("Not authorized to delete Event")
             }
+            await deleteEvent(eventId)
         } catch (error) {
        toast.error("Something went wrong");
           console.error(error);
@@ -55,6 +47,11 @@ const navigate = useNavigate();
     const handleLogout = async(e)=>{
     try {
         e.preventDefault();
+        if(!authUser){
+          toast.error("Login First")
+          navigate('/login')
+          return;
+        }
          await logout();
          navigate('/login')
     } catch (error) {
@@ -78,7 +75,14 @@ const navigate = useNavigate();
     onClick={handleLogout}
     className='bg-white text-black px-4 py-2 cursor-pointer rounded-lg'>Logout</button>
     <button
-    onClick={()=>navigate('/profile')}
+    onClick={()=> {
+    if (!authUser) {
+      toast.error("Login First");
+      navigate('/login');
+      return;
+    }
+    navigate('/profile');
+  }}
     className='bg-slate-600 text-white px-4 cursor-pointer py-2 rounded-lg'>Profile</button>
   </div>
 </div>
@@ -86,7 +90,7 @@ const navigate = useNavigate();
 
       <div className='grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 gap-6 p-8'>
   {events.map(event => (
-    <Link
+    <div
       key={event._id}
       to={`/event/${event._id}`}
       className='relative card bg-base-200 w-full rounded-lg shadow-lg transform transition-transform hover:scale-105'
@@ -94,23 +98,29 @@ const navigate = useNavigate();
       <span className='absolute top-2 right-2 cursor-pointer'>
         <MdDelete 
         
-        onClick={handleDeleteEvent}
+        onClick={(e)=>handleDeleteEvent(e,event._id)}
         size={22} />
       </span>
       <div className="card-body flex flex-col items-center justify-center p-6">
+        <Link to={`/event/${event._id}`} >
         <h2 className="card-title text-xl font-semibold text-blue-400 mb-2">
           {event.name}
         </h2>
+        </Link>
         <span className='font-light text-[16px] text-white'>
           {event.description}
         </span>
-        <button 
-        onClick={handleBookingClick}
-        className=' bg-slate-600 rounded-4xl px-24 py-2' >Book Event</button>
+        <BookEvent eventId={event._id} />
       </div>
-    </Link>
+    </div>
   ))}
       </div>
+
+{
+  authUser?.role === "admin" && <CreateEvent />
+}
+
+    
       
     </div>
   );

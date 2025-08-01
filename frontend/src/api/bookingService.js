@@ -4,12 +4,16 @@ const bookingService = {
   
   bookSeats: async (eventId, data) => {
     const res = await axiosInstance.post(`/booking/bookEvent/${eventId}`, data);
+    console.log(res);
+    
     return res.data;
   },
 
 
   myBookings: async () => {
     const res = await axiosInstance.get('/booking/myBookings');
+   
+    
     return res.data;
   },
 

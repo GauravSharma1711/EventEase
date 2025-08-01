@@ -28,8 +28,12 @@ const eventService  = {
   updateEventStatus :  async (eventId)=>{
      const res = await axiosInstance.put(`/event/updateStatus/${eventId}`);
        return res.data;
-  }
+  },
 
+  getEventById : async(eventId)=>{
+     const res = await axiosInstance.get(`/event/${eventId}`);
+       return res.data;
+  }
 
 
 

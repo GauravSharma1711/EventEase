@@ -9,6 +9,8 @@ const useBookingStore = create((set, get) => ({
 
   bookSeats: async (eventId, data) => {
     try {
+      
+      
       const res = await bookingService.bookSeats(eventId, data);
       toast.success('Booking successful!');
       return res;
@@ -20,8 +22,8 @@ const useBookingStore = create((set, get) => ({
  
   fetchMyBookings: async () => {
     try {
-      const bookings = await bookingService.myBookings();
-      set({ myBookings: bookings });
+      const res = await bookingService.myBookings();
+    set({ myBookings: res.myBookings });
     } catch (err) {
       toast.error('Failed to fetch your bookings',err);
     }
@@ -41,8 +43,10 @@ const useBookingStore = create((set, get) => ({
  
   fetchAllBookings: async (eventId) => {
     try {
-      const bookings = await bookingService.allBooking(eventId);
-      set({ allBookings: bookings });
+      const res = await bookingService.allBooking(eventId);
+     
+      
+      set({ allBookings: res.attendees });
     } catch (err) {
       toast.error('Failed to fetch all bookings',err);
     }

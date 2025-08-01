@@ -7,6 +7,7 @@ import LoginPage from './pages/lOGINpAGE.JSX';
 import SignupPage from './pages/SignupPage';
 import Events from './pages/Events';
 import ProfilePage from './pages/ProfilePage';
+import Event from './pages/Event';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
     <Route path='/signup' element={<SignupPage/>} />
     <Route path='/events' element={<Events/>} />
    <Route path='/profile' element={<ProfilePage/>} />
+    <Route path='/event/:eventId' element={<Event/>} />
         </Routes>
   </>
   )

@@ -4,6 +4,9 @@ import eventService from '../api/eventService';
 
 const useEventStore = create((set, get) => ({
   events: [],
+  event:null,
+  eventStatus:null,
+
 
   fetchAllEvents: async () => {
     try {
@@ -53,14 +56,27 @@ const useEventStore = create((set, get) => ({
 
   updateEventStatus: async (eventId) => {
     try {
-      await eventService.updateEventStatus(eventId);
+     const res =  await eventService.updateEventStatus(eventId);
       toast.success('Event status updated');
-      get().fetchAllEvents();
+      set({eventStatus:res.status})
+      
     } catch (err) {
       toast.error('Failed to update status');
       console.log(err);
     }
+  },
+
+  getEventById:async(eventId)=>{
+     try {
+      const res = await eventService.getEventById(eventId); 
+      set({ event: res.event});
+    } catch (err) {
+      toast.error('Failed to fetch event by id');
+      console.log(err);
+    }
   }
+
+
 }));
 
 export default useEventStore;
