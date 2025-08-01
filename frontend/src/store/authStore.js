@@ -7,9 +7,7 @@ const useAuthStore = create((set)=>({
 
 
      authUser: null,
-    allUsers:[],
-
-
+  
      signUp: async (data) => {
       try {
         const res = await authService.register(data);
