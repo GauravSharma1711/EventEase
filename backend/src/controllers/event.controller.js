@@ -2,6 +2,7 @@
 
 import Event from '../models/event.model.js'
 import User from '../models/user.model.js';
+import generateEventId from '../utils/generateEventId.js'
 
 export const createEvent = async(req,res)=>{
     try {
@@ -19,13 +20,16 @@ export const createEvent = async(req,res)=>{
         return res.status(403).json({error:"not authorized to create event"});
     }
 
+   const eventId =  generateEventId();
+
     const event  = await Event.create({
          name,
          description,
          capacity,
          location,
          category,
-         createdBy: loggedInUser._id
+         createdBy: loggedInUser._id,
+         eventId:eventId
     })
 
     return res.status(201).json({event,message:"event created successfully"});
