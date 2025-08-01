@@ -21,6 +21,7 @@ const eventService  = {
 
   getAllEvent :  async ()=>{
      const res = await axiosInstance.get('/event/all');
+
        return res.data;
   },
 

@@ -7,8 +7,8 @@ const useEventStore = create((set, get) => ({
 
   fetchAllEvents: async () => {
     try {
-      const data = await eventService.getAllEvent();
-      set({ events: data });
+      const res = await eventService.getAllEvent();
+      set({ events: res.events });
     } catch (err) {
       toast.error('Failed to fetch events');
       console.log(err);
