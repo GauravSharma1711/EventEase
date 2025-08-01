@@ -169,3 +169,20 @@ export const updateEventStatus = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const getEventById = async(req,res)=>{
+   try {
+    const eventId = req.params.eventId
+        const event = await Event.findById(eventId);
+    
+      if(!event){
+        return res.status(404).json({error:"event not found"});
+      }
+
+        return res.status(200).json({event,message:" Event fetched successfullly"});
+
+    } catch (error) {
+          console.log("error in  geteventbyid controller",error);
+        return res.status(500).json({error:"Internal server error"});
+    }
+}

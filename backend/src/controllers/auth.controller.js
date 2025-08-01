@@ -6,7 +6,7 @@ import generateTokenAndSetCookie from "../utils/generateTokenAndSetCookie.js";
 export const signup = async (req,res)=>{
     try {
     
-        const {username,fullName, email,role,password} = req.body;
+        const {username,fullName, email,password,role} = req.body;
 
         if(!username || !fullName || !email || !role || !password){
             return res.status(400).json({error:"All fileds are required"});

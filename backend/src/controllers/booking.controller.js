@@ -11,9 +11,8 @@ export const bookSeats = async (req, res) => {
     const userId = req.user.id;
     const { seats } = req.body;
 
-    const user = await User.findById(userId)
+    const user = await User.findById(userId);
 
-   
     if (!seats || seats < 1 || seats > 2) {
       return res.status(400).json({ error: "You can book 1 or 2 seats only." });
     }
@@ -21,12 +20,6 @@ export const bookSeats = async (req, res) => {
     const event = await Event.findById(eventId);
     if (!event) {
       return res.status(404).json({ error: "No event found" });
-    }
-
-    
-    const totalAfterBooking = event.bookedSeats + seats;
-    if (totalAfterBooking > event.capacity) {
-      return res.status(400).json({ error: "Cannot book seats, event is full." });
     }
 
    
@@ -39,25 +32,31 @@ export const bookSeats = async (req, res) => {
       return res.status(400).json({ error: "You have already booked this event." });
     }
 
-   
+    
+    const updatedEvent = await Event.findOneAndUpdate(
+      { _id: eventId, bookedSeats: { $lte: event.capacity - seats } },
+      { $inc: { bookedSeats: seats } },
+      { new: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(400).json({ error: "Not enough seats available." });
+    }
+
     const booking = await Booking.create({
       event: eventId,
       bookedBy: userId,
       seats,
     });
 
-   
-    event.bookedSeats += seats;
-    await event.save();
-
-    logBooking(user,eventId);
-
+    logBooking(user, eventId);
 
     return res.status(201).json({
       message: "Booking successful",
       booking,
-      event,
+      event: updatedEvent, 
     });
+    
   } catch (error) {
     console.error("Error in bookSeats controller:", error);
     return res.status(500).json({ error: "Internal server error" });
@@ -70,10 +69,7 @@ export const bookSeats = async (req, res) => {
 export const  getMyBookings = async(req,res)=>{
     try {
         const userId = req.user.id;
-        const myBookings  = await Booking.find({bookedBy:userId})
-
-
-
+        const myBookings  = await Booking.find({bookedBy:userId}).populate("event")
 
         if(myBookings.length===0){
             return res.status(404).json({error:"no booking found yet"})
