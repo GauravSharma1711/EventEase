@@ -7,9 +7,9 @@ import generateEventId from '../utils/generateEventId.js'
 export const createEvent = async(req,res)=>{
     try {
         
- const {name,description,capacity,location,category} = req.body;
+ const {name,description,capacity,location,category,date} = req.body;
 
- if(!name || !description || !capacity || !location || !category){
+ if(!name || !description || !capacity || !location || !category || !date){
     return res.status(400).json({error:"All fields are required"});
  }
  
@@ -28,6 +28,7 @@ export const createEvent = async(req,res)=>{
          capacity,
          location,
          category,
+         date,
          createdBy: loggedInUser._id,
          eventId:eventId
     })
@@ -46,7 +47,7 @@ export const updateEvent = async(req,res)=>{
         
 
          const { eventId } = req.params; 
-    const { name, description, capacity, location, category } = req.body;
+    const { name, description, capacity, location, category,date } = req.body;
 
     const loggedInUser = await User.findById(req.user.id);
     if (!loggedInUser || loggedInUser.role !== 'admin') {
@@ -64,6 +65,7 @@ export const updateEvent = async(req,res)=>{
     if (capacity) event.capacity = capacity;
     if (location) event.location = location;
     if (category) event.category = category;
+    if (date) event.date = new Date(date);
 
     await event.save();
 
@@ -130,27 +132,26 @@ export const getAllEvents = async (req,res)=>{
 }
 
 
-export const updateEventStatus = async(req,res)=>{
+export const updateEventStatus = async (req, res) => {
   try {
-
-     const { eventId } = req.params; 
-   
-    const loggedInUser = await User.findById(req.user.id);
-    if (!loggedInUser || loggedInUser.role !== 'admin') {
-      return res.status(403).json({ error: 'Not authorized to update event Date' });
-    }
+    const eventId = req.params.eventId;
 
     const event = await Event.findById(eventId);
     if (!event) {
-      return res.status(404).json({ error: 'Event not found' });
+      return res.status(404).json({ error: "Event not found" });
     }
 
-   const currentDate = new Date();
-    const eventDate = new Date(event.date);
+    
+    const today = new Date();
+    
 
-    if (eventDate > currentDate) {
+    
+    const eventDate = new Date(event.date);
+    
+
+    if (eventDate > today) {
       event.status = "Upcoming";
-    } else if (eventDate < currentDate) {
+    } else if (eventDate < today) {
       event.status = "Completed";
     } else {
       event.status = "Ongoing";
@@ -158,10 +159,13 @@ export const updateEventStatus = async(req,res)=>{
 
     await event.save();
 
-    return res.status(201).json({message:"event status updated successfully"})
+    return res.status(200).json({
+      message: "Event status updated",
+      status: event.status,
+    });
 
   } catch (error) {
-       console.log("error in  updateEventStatus controller",error);
-        return res.status(500).json({error:"Internal server error"});
+    console.error("Error in updateEventStatus controller:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
-}
+};

@@ -63,8 +63,8 @@ export const bookSeats = async (req, res) => {
 
 export const  getMyBookings = async(req,res)=>{
     try {
-        const userid = req.user.id;
-        const myBookings  = await Booking.find({bookedBy:userid})
+        const userId = req.user.id;
+        const myBookings  = await Booking.find({bookedBy:userId})
 
 
 
@@ -105,14 +105,10 @@ export const  cancelBooking = async(req,res)=>{
               if (new Date(event.date) <= new Date()) {
     return res.status(400).json({ error: "You cannot cancel the event now" });
 }
-
-
-
-              
+ 
                 event.bookedSeats-= booking.seats;
                  await event.save();
                
-
             await Booking.findByIdAndDelete(bookingId);
 
               return res.status(200).json({ message: "Booking cancelled successfully" });
@@ -141,8 +137,7 @@ export const getAllAttendees = async(req,res)=>{
 
         const bookings = await Booking.find({
             event:eventId,
-        }).populate("bookedBy");
-
+        }).populate("bookedBy","-password")
        
 
         return res.status(200).json({ attendees: bookings });
