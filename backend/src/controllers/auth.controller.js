@@ -93,3 +93,23 @@ export const logout = async (req,res)=>{
         return res.status(500).json({error:"Internal server error"});
        }
 }
+
+
+export const getCurrentUser = async (req,res)=>{
+   try {
+    const user = req.user;
+  
+    if(!user){
+      return res.status(401).json({error:"no user found please login"});
+    }
+  
+    const currentUser = await User.findById(req.user.id).select('-password');
+  
+  
+    return res.status(200).json({currentUser});
+  } catch (error) {
+    console.log("error getting current user",error.message);
+    return res.status(500).json({error:"Internal server error"});
+    
+  }
+}
