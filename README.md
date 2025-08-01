@@ -61,48 +61,46 @@ EventEase/
 cd backend
 Install backend dependencies:
 
-bash
-Copy
-Edit
+
 npm install
+
+```
+
 Create a .env file inside the backend/ folder and add the following:
 
-env
-Copy
+```bash
 Edit
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
+```
 Start the backend server:
 
-bash
-Copy
-Edit
+```bash
 npm run dev
+```
+
 💻 Frontend Setup
 Navigate to the frontend folder:
 
-bash
-Copy
-Edit
+```bash
 cd frontend
+```
 Install frontend dependencies:
 
-bash
-Copy
-Edit
+```bash
 npm install
+```
+
 Create a .env file inside the frontend/ folder and add the following:
 
-env
-Copy
-Edit
+```bash
 VITE_BACKEND_URL=http://localhost:8000/api/v1
+```
+
 Start the frontend app:
 
-bash
-Copy
-Edit
+```bash
 npm run dev
 
 
