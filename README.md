@@ -50,6 +50,43 @@ EventEase/
 ├── frontend/ # React client
 
 
+📁 Folder Structure
+
+```bash
+.
+├── backend
+│   ├── node_modules
+│   ├── src
+│   │   ├── controllers
+│   │   ├── db
+│   │   ├── middlewares
+│   │   ├── models
+│   │   ├── routes
+│   │   ├── utils
+│   │   └── index.js
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   └── package-lock.json
+│
+└── frontend
+    ├── public
+    ├── src
+    │   ├── api
+    │   ├── assets
+    │   ├── Components
+    │   ├── pages
+    │   ├── store
+    │   ├── utils
+    │   ├── App.jsx
+    │   ├── index.css
+    │   └── main.jsx
+    ├── .env
+    ├── .gitignore
+    ├── index.html
+    └── eslint.config.js
+
+```
 
 ---
 
