@@ -97,10 +97,21 @@ export const  cancelBooking = async(req,res)=>{
                }
 
                const event = await Event.findById(booking.event);
-               if(event){
+
+               if(!event){
+  return res.status(400).json({error:"event not found"});
+               }
+
+              if (new Date(event.date) <= new Date()) {
+    return res.status(400).json({ error: "You cannot cancel the event now" });
+}
+
+
+
+              
                 event.bookedSeats-= booking.seats;
                  await event.save();
-               }
+               
 
             await Booking.findByIdAndDelete(bookingId);
 
