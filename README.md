@@ -20,7 +20,7 @@
 
 ### 🔔 User Experience
 - Toast notifications for actions (e.g., login, booking, deletion)
-- Responsive UI built with Tailwind CSS
+
 
 ---
 
