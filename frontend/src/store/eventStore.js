@@ -31,11 +31,11 @@ const useEventStore = create((set, get) => ({
     }
   },
 
-  updateEvent: async (eventId, eventData) => {
+  updateEvent: async (eventId, data) => {
     try {
-      const res = await eventService.updateEvent(eventId, eventData);
+      const res = await eventService.updateEvent(eventId, data);
       toast.success('Event updated');
-      get().fetchAllEvents();
+      await get().getEventById(eventId);
       return res;
     } catch (err) {
       toast.error('Failed to update event');

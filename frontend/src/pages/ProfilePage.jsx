@@ -95,23 +95,23 @@ const ProfilePage = () => {
         className=' relative bg-base-200 border border-gray-700 rounded-lg p-4 mb-4 shadow-md'
       >
         <h3 className='text-2xl font-semibold text-white mb-2'>
-          {booking.event.name}
+          {booking.event?.name}
         </h3>
         <p className='text-gray-300'>
-          <span className='font-medium text-white'>Description:</span> {booking.event.description}
+          <span className='font-medium text-white'>Description:</span> {booking.event?.description}
         </p>
         <p className='text-gray-300'>
-          <span className='font-medium text-white'>Date:</span> {formatDate(booking.event.date)}
+          <span className='font-medium text-white'>Date:</span> {formatDate(booking.event?.date)}
         </p>
         <p className='text-gray-300'>
-          <span className='font-medium text-white'>Location:</span> {booking.event.location}
+          <span className='font-medium text-white'>Location:</span> {booking.event?.location}
         </p>
         <p className='text-gray-300'>
-          <span className='font-medium text-white'>Seats Booked:</span> {booking.seats}
+          <span className='font-medium text-white'>Seats Booked:</span> {booking?.seats}
         </p>
         <p className='text-gray-300'>
           <span className='font-medium text-white'>Status:</span> 
-          <span className='ml-2 badge badge-success'>{booking.status}</span>
+          <span className='ml-2 badge badge-success'>{booking?.status}</span>
         </p>
 
 <button

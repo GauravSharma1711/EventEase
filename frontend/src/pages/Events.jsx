@@ -53,7 +53,7 @@ const navigate = useNavigate();
           return;
         }
          await logout();
-         navigate('/login')
+         navigate('/')
     } catch (error) {
       console.log(error);
       
@@ -110,7 +110,10 @@ const navigate = useNavigate();
         <span className='font-light text-[16px] text-white'>
           {event.description}
         </span>
-        <BookEvent eventId={event._id} />
+        {
+          authUser && <BookEvent eventId={event._id} />
+        }
+        
       </div>
     </div>
   ))}

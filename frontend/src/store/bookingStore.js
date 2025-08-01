@@ -36,7 +36,9 @@ const useBookingStore = create((set, get) => ({
       toast.success('Booking cancelled');
       get().fetchMyBookings();
     } catch (err) {
-      toast.error('Failed to cancel booking',err);
+      console.log(err);
+      
+      toast.error('Failed to cancel booking');
     } 
   },
 

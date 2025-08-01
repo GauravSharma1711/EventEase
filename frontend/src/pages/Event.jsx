@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useEventStore from '../store/eventStore.js';
 import   useBookingStore from '../store/bookingStore.js'
 import   useAuthStore from '../store/authStore.js'
+import UpdateEvent from '../Components/UpdateEvent.jsx';
 
 const Event = () => {
 
@@ -14,12 +15,9 @@ const Event = () => {
     const {fetchAllBookings,allBookings} = useBookingStore();
 
 
-    const {updateEventStatus,updateEvent,getEventById,event,eventStatus} = useEventStore();
+    const {updateEventStatus,getEventById,event,eventStatus} = useEventStore();
   
-    
-    console.log(event);
-    
-
+  
     useEffect(() => {
    updateEventStatus(eventId)
     }, [updateEventStatus,eventId])
@@ -44,7 +42,10 @@ const Event = () => {
     <h1 className=' font-bold text-3xl' >{event?.name}</h1>
     <p className=' font-light text-2xl' >{event?.description}</p>
     </div>
-    <div className=' flex items-center gap-2'>
+    <div className=' flex  items-center gap-2'>
+     {event && (
+   <UpdateEvent eventId={eventId} />
+)}
        <div className="badge badge-success">{eventStatus}</div>
     </div>
    </div>
