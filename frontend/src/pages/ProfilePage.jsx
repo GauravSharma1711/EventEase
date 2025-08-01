@@ -9,9 +9,10 @@ const ProfilePage = () => {
 
   const {authUser,getCurrentUser} = useAuthStore();
 
-  const {myBookings,fetchMyBookings} = useBookingStore();
+  const {myBookings,fetchMyBookings,cancelBooking} = useBookingStore();
 
   console.log(myBookings);
+  
   
 
   useEffect(() => {
@@ -22,6 +23,15 @@ const ProfilePage = () => {
    fetchMyBookings();   
     }, [fetchMyBookings])
 
+
+    const handelCancelBooking = (e,bookingId)=>{
+      try {
+        e.preventDefault();
+        cancelBooking(bookingId)
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
   return (
     <div className='bg-black min-h-screen w-full text-white font-sans'>
@@ -104,7 +114,9 @@ const ProfilePage = () => {
           <span className='ml-2 badge badge-success'>{booking.status}</span>
         </p>
 
-<button className='absolute btn btn-error right-4 top-4 font-bold text-[18px] ' >CancelBooking</button>
+<button
+onClick={(e)=>handelCancelBooking(e,booking._id)}
+className='absolute btn btn-error right-4 top-4 font-bold text-[18px] ' >CancelBooking</button>
 
       </div>
     ))
