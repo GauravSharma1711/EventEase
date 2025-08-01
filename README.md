@@ -102,12 +102,14 @@ Start the frontend app:
 
 ```bash
 npm run dev
-
+```
 
 ## 📩 API Documentation
 
 You can access the API documentation via the following Postman collections:
 
+```bash
 - ✅ [Auth APIs](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-d2b6485d-4c74-4ecd-b976-d921b0304ced)
 - ✅ [Booking APIs](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-38fad699-fef1-4be4-b468-018b69cc059e)
 - ✅ [Event APIs](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-85b8fd8d-e9c9-40b1-b065-fd51245032c2)
+```
