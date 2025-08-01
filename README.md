@@ -49,6 +49,9 @@ EventEase/
 ├── backend/ # Express API with MongoDB
 ├── frontend/ # React client
 
+yaml
+Copy
+Edit
 
 ---
 
@@ -58,27 +61,33 @@ EventEase/
 
 ```bash
 cd backend
+Install backend dependencies:
 
-2. Install backend dependencies:
-
+bash
+Copy
+Edit
 npm install
-
 Create a .env file inside the backend/ folder and add the following:
 
+env
+Copy
+Edit
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-
-
 Start the backend server:
-npm run dev
 
+bash
+Copy
+Edit
+npm run dev
 💻 Frontend Setup
 Navigate to the frontend folder:
 
+bash
+Copy
+Edit
 cd frontend
-
-
 Install frontend dependencies:
 
 bash
@@ -97,6 +106,3 @@ bash
 Copy
 Edit
 npm run dev
-
-
-
