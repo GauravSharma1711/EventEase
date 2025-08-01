@@ -49,9 +49,7 @@ EventEase/
 ├── backend/ # Express API with MongoDB
 ├── frontend/ # React client
 
-yaml
-Copy
-Edit
+
 
 ---
 
