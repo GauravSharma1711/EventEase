@@ -14,7 +14,7 @@ const Events = () => {
 
 const navigate = useNavigate();
 
-    const {authUser} = useAuthStore();
+    const {authUser,logout} = useAuthStore();
    
     
     const {events,fetchAllEvents} = useEventStore();
@@ -52,14 +52,37 @@ const navigate = useNavigate();
        }
     }
 
+    const handleLogout = async(e)=>{
+    try {
+        e.preventDefault();
+         await logout();
+         navigate('/login')
+    } catch (error) {
+      console.log(error);
+      
+    }
+    }
+
   return (
   
     <div className='bg-black min-h-screen w-full text-white font-sans'>
 
-      <div className='border-b-2 border-white py-8 px-4 flex flex-col items-center lg:items-start justify-center rounded-b-lg'>
-        <h1 className='font-bold text-4xl mb-2'>Events</h1>
-        <p className='text-lg text-gray-300'>All Events are listed below</p>
-      </div>
+   <div className='border-b-2 border-white py-8 px-4 flex flex-col lg:flex-row items-center justify-between rounded-b-lg'>
+  <div className='text-center lg:text-left'>
+    <h1 className='font-bold text-4xl mb-2'>Events</h1>
+    <p className='text-lg text-gray-300'>All Events are listed below</p>
+  </div>
+
+  <div className='mt-4 lg:mt-0 flex gap-4'>
+    <button 
+    onClick={handleLogout}
+    className='bg-white text-black px-4 py-2 cursor-pointer rounded-lg'>Logout</button>
+    <button
+    onClick={()=>navigate('/profile')}
+    className='bg-slate-600 text-white px-4 cursor-pointer py-2 rounded-lg'>Profile</button>
+  </div>
+</div>
+
 
       <div className='grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 gap-6 p-8'>
   {events.map(event => (

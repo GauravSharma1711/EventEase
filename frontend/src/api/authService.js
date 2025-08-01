@@ -3,7 +3,7 @@ import axiosInstance from "./axios.js";
 const authService = {
 
  register : async(userData) =>{
-        const res = await axiosInstance.post('/auth/register',userData);
+        const res = await axiosInstance.post('/auth/signup',userData);
         return res.data;
     },
     
