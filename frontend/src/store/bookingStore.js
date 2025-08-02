@@ -23,6 +23,8 @@ const useBookingStore = create((set, get) => ({
   fetchMyBookings: async () => {
     try {
       const res = await bookingService.myBookings();
+      console.log(res);
+      
     set({ myBookings: res.myBookings });
     } catch (err) {
       toast.error('Failed to fetch your bookings',err);
@@ -34,7 +36,10 @@ const useBookingStore = create((set, get) => ({
     try {
       await bookingService.cancelBooking(bookingId);
       toast.success('Booking cancelled');
-      get().fetchMyBookings();
+      // get().fetchMyBookings();
+        set((state) => ({
+      myBookings: state.myBookings.filter(b => b._id !== bookingId)
+    }));
     } catch (err) {
       console.log(err);
       
