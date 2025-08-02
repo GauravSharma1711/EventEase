@@ -15,9 +15,10 @@ import { fileURLToPath } from 'url';
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Required for __dirname in ES module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const frontendPath = path.resolve(__dirname, "../../../frontend/dist");
+
 
 // Middleware
 app.use(express.json());
@@ -41,11 +42,10 @@ app.use('/api/v1/booking', bookingRoutes);
 
 // Serve static files from frontend in production
 if (process.env.NODE_ENV.trim() === 'production') {
-  app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-  });
+app.use(express.static(frontendPath));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
 }
 
 // Start server
