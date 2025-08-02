@@ -1,0 +1,26 @@
+{
+  "name": "eventease",
+  "version": "1.0.0",
+  "description": "**EventEase** is a full-stack event management platform that allows users to discover and book events, and provides admins with tools to manage event listings efficiently. The project focuses on role-based access, real-time updates, and a clean user experience.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "cross-env NODE_ENV=production node backend/src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GauravSharma1711/EventEase.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/GauravSharma1711/EventEase/issues"
+  },
+  "homepage": "https://github.com/GauravSharma1711/EventEase#readme",
+  "dependencies": {
+    "cross-env": "^10.0.0"
+  }
+}

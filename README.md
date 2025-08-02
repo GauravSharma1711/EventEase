@@ -113,7 +113,20 @@ Create a .env file inside the backend/ folder and add the following:
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
+NODE_ENV=development
 ```
+
+🔐 Note: In development mode, CORS is enabled only for http://localhost:5173 as per this condition in the backend:
+```bash
+if (process.env.NODE_ENV.trim() !== "production") {
+  app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173'
+  }));
+}
+
+```
+
 Start the backend server:
 
 ```bash
@@ -143,6 +156,40 @@ Start the frontend app:
 ```bash
 npm run dev
 ```
+
+
+🚀 Production Build & Deployment
+To prepare the project for deployment:
+
+Build the frontend and install dependencies:
+
+```bash
+npm run build
+```
+This will:
+
+Install all dependencies
+
+Build the React app into frontend/dist
+
+The backend will serve this static build in production mode
+
+Update NODE_ENV=production in your .env file in backend.
+
+Start the production server:
+
+```bash
+npm start
+```
+In production, the server will:
+
+Serve frontend files from frontend/dist
+
+Handle all API requests at /api/v1/*
+
+Return index.html for unknown routes (React routing)
+
+
 
 ## 📩 API Documentation
 
