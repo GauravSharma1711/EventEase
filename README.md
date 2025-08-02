@@ -208,3 +208,7 @@ Handles booking of events, viewing/canceling bookings.
 - 🔗 [View Collection](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-38fad699-fef1-4be4-b468-018b69cc059e)
 
 > ```
+
+🚀 Live Demo
+🔗 Frontend + Backend (Full Stack Deployment):
+https://eventease-stet.onrender.com
