@@ -144,10 +144,18 @@ npm run dev
 
 ## 📩 API Documentation
 
-You can access the API documentation via the following Postman collections:
+The backend APIs are grouped into three main categories: **Auth**, **Event**, and **Booking**. Each group contains all necessary endpoints with example requests, responses, and status codes. You can explore them in detail using the Postman collections below:
 
-```bash
-- ✅ [Auth APIs](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-d2b6485d-4c74-4ecd-b976-d921b0304ced)
-- ✅ [Booking APIs](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-38fad699-fef1-4be4-b468-018b69cc059e)
-- ✅ [Event APIs](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-85b8fd8d-e9c9-40b1-b065-fd51245032c2)
-```
+🔐 **Auth APIs**  
+Handles user registration, login, and authentication.
+- 🔗 [View Collection](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-d2b6485d-4c74-4ecd-b976-d921b0304ced)
+
+📅 **Event APIs**  
+Allows users/admins to create, view, update, or delete events.
+- 🔗 [View Collection](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-85b8fd8d-e9c9-40b1-b065-fd51245032c2)
+
+📝 **Booking APIs**  
+Handles booking of events, viewing/canceling bookings.
+- 🔗 [View Collection](https://www.postman.com/gauravsharma1711/workspace/eventease/collection/36921467-38fad699-fef1-4be4-b468-018b69cc059e)
+
+> ```
