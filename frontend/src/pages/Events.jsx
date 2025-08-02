@@ -63,6 +63,15 @@ const [date, setDate] = useState('');
     }
     }
 
+     const handleClick = (eventId) => {
+    if (authUser) {
+      navigate(`/event/${eventId}`);
+    } else {
+      toast.error('Please login first');
+      navigate('/login');
+    }
+  };
+
     const filteredEvents = events.filter(event => {
   const matchesCategory = category ? event.category === category : true;
   const matchesLocation = location ? event.location === location : true;
@@ -150,11 +159,13 @@ const [date, setDate] = useState('');
         size={22} />
       </span>
       <div className="card-body flex flex-col items-center justify-center p-6">
-        <Link to={`/event/${event._id}`} >
+        <div
+        onClick={()=>handleClick(event._id)}
+        >
         <h2 className="card-title text-xl font-semibold text-blue-400 mb-2">
           {event.name}
         </h2>
-        </Link>
+        </div>
         <span className='font-light text-[16px] text-white'>
           {event.description}
         </span>

@@ -55,7 +55,7 @@ className='text-2xl border-2 border-white px-16 py-2 rounded-4xl cursor-pointer'
    <div className="card bg-base-200 text-neutral-content m-8 lg:w-56 w-66">
   <div className="card-body items-center text-center">
     <h2 className="card-title">Event Filtering</h2>
-    <p>Filter Events base on category, location, daterange</p>
+    <p>Filter Events base on category, Location ans Date</p>
   </div>
 </div>
   
