@@ -97,9 +97,11 @@ EventEase/
 
 ```bash
 cd backend
+```
+
 Install backend dependencies:
 
-
+```bash
 npm install
 
 ```
