@@ -11,7 +11,7 @@ const ProfilePage = () => {
 
   const {myBookings,fetchMyBookings,cancelBooking} = useBookingStore();
 
-  console.log(myBookings);
+
   
   
 
@@ -24,10 +24,10 @@ const ProfilePage = () => {
     }, [fetchMyBookings])
 
 
-    const handelCancelBooking = (e,bookingId)=>{
+    const handelCancelBooking = async(e,bookingId)=>{
       try {
         e.preventDefault();
-        cancelBooking(bookingId)
+      await  cancelBooking(bookingId)
       } catch (error) {
         console.log(error);
       }
