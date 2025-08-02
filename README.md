@@ -17,10 +17,11 @@
 ### 📄 Bookings Dashboard
 - Users can view and cancel their bookings
 - Admins can monitor event bookings
+Filter bookings by **location** and **event date** and **category** for easier management and tracking
 
 ### 🔔 User Experience
 - Toast notifications for actions (e.g., login, booking, deletion)
-
+- Styled using **DaisyUI** for consistent and visually appealing UI components
 
 ---
 
@@ -106,7 +107,7 @@ npm install
 Create a .env file inside the backend/ folder and add the following:
 
 ```bash
-Edit
+
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret

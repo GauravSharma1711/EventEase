@@ -36,7 +36,6 @@ const useBookingStore = create((set, get) => ({
     try {
       await bookingService.cancelBooking(bookingId);
       toast.success('Booking cancelled');
-      // get().fetchMyBookings();
         set((state) => ({
       myBookings: state.myBookings.filter(b => b._id !== bookingId)
     }));
