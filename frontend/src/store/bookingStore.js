@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import toast from 'react-hot-toast';
 import bookingService from '../api/bookingService.js';
 
-const useBookingStore = create((set, get) => ({
+const useBookingStore = create((set) => ({
   myBookings: [],
   allBookings: [],
   
